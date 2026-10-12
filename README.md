@@ -67,3 +67,7 @@ docker run --rm -it -p 4000:4000 -v "$PWD":/srv -w /srv ruby:3.4 \
 
 The [Editing guide](docs/guide.md) (also published on the site) explains every data file and how
 to add services, components, environments, proxies and guides.
+
+## License
+
+[MIT](LICENSE)
