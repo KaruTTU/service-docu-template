@@ -3,8 +3,8 @@ title: Service Docs                      # PLACEHOLDER: e.g. "<ORG NAME> Service
 description: Architecture, environments and traffic flow of our services.
 org_name: "<ORG NAME>"                   # PLACEHOLDER: shown on the home page
 
-# GitHub Pages project site: https://<ORG>.github.io/service-docu/ (PLACEHOLDER: <ORG> = GitHub org)
-url: "https://<ORG>.github.io"              # PLACEHOLDER
+# GitHub Pages project site: https://your-org.github.io/service-docu/ (PLACEHOLDER: your-org = GitHub org)
+url: "https://your-org.github.io"              # PLACEHOLDER
 baseurl: "/service-docu"                 # PLACEHOLDER: repository name
 
 theme: just-the-docs
@@ -24,12 +24,12 @@ back_to_top_text: "Back to top"
 
 aux_links:
   "Source on GitHub":
-    - "https://github.com/<ORG>/service-docu"   # PLACEHOLDER
+    - "https://github.com/your-org/service-docu"   # PLACEHOLDER
 aux_links_new_tab: true
 
 gh_edit_link: true
 gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/<ORG>/service-docu"   # PLACEHOLDER
+gh_edit_repository: "https://github.com/your-org/service-docu"   # PLACEHOLDER
 gh_edit_branch: "main"
 gh_edit_view_mode: "tree"
 
