@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
         uses: actions/configure-pages@v6
 
-      # With Pages enabled, url/baseurl come from the Pages settings (so the <ORG> placeholders in
+      # With Pages enabled, url/baseurl come from the Pages settings (so the placeholders in
       # _config.yml don't matter); otherwise from _config.yml.
       - name: Build with Jekyll
         run: |

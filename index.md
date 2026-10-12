@@ -27,7 +27,7 @@ run the services documented here, and where to go for support.
 Hostnames, ports, databases, connections and proxy routes for each service live in YAML files under
 `_data/<service>/`. Every table and diagram on this site is generated from those files, so update the
 data rather than the pages. See the
-[README]({{ site.gh_edit_repository }}#readme) for how to add a service, component or environment.
+[Editing guide]({{ '/docs/guide.html' | relative_url }}) for how to add a service, component or environment.
 
 ## Links
 

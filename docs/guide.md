@@ -37,7 +37,7 @@ flowchart LR
 You need [Git](https://git-scm.com/) and access to the repository.
 
 ```sh
-git clone https://github.com/<ORG>/service-docu.git
+git clone https://github.com/your-org/service-docu.git
 cd service-docu
 ```
 
@@ -84,6 +84,9 @@ In `_config.yml`, set:
 title: Acme Service Docs
 org_name: "Acme Ltd"
 ```
+
+and replace `your-org` in `url`, `aux_links` and `gh_edit_repository` with your GitHub organization
+(the README's *First-time setup* lists every setting).
 
 In `index.md`, replace the paragraph under *Organization overview* and the placeholder links
 under *Links*.
@@ -417,7 +420,7 @@ green. Merging publishes the change.
 
 1. On GitHub, open the repository's **Actions** tab. The run *Build and deploy to GitHub Pages*
    for your commit should finish with a green check in 2–3 minutes.
-2. Open the site: `https://<ORG>.github.io/service-docu/`. Reload with
+2. Open the site: `https://your-org.github.io/service-docu/`. Reload with
    <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> if you still see the old version.
 
 If the run is red, open it and expand the failed step:
