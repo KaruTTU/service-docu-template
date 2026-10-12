@@ -1,0 +1,19 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Dependencies outside this service. Which components use them is derived from
+# connections.yml, so it is not repeated here.
+#   id     - unique within the service (also unique vs. component and database ids)
+#   url    - host or URL (as used by the components)
+#   vendor - vendor or owning team
+
+- id: payment-api
+  name: Payment API
+  url: "https://api.payments.example.com/v2"
+  vendor: "<Payment Vendor Ltd>"
+  notes: Sandbox endpoint is used in test.
+
+- id: smtp-relay
+  name: SMTP relay
+  url: smtp.example.org
+  vendor: "<Internal IT>"
+  notes: Shared organization mail relay.

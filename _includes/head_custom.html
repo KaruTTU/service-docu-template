@@ -1,0 +1,49 @@
+{%- comment -%}
+  Click a Mermaid diagram to open it at full size in an overlay (scrollable; Esc, a click or
+  the close button closes it). Diagrams on the page stay fitted to the content column.
+{%- endcomment -%}
+<style>
+  .main-content code.language-mermaid svg { cursor: zoom-in; }
+  .diagram-zoom {
+    position: fixed; inset: 0; z-index: 1000; overflow: auto;
+    background: #fff; padding: 3rem 1.5rem 1.5rem; cursor: zoom-out;
+  }
+  .diagram-zoom svg { display: block; margin: 0 auto; max-width: none !important; height: auto; }
+  .diagram-zoom button {
+    position: fixed; top: 0.75rem; right: 1rem; font: inherit; font-size: 0.875rem;
+    padding: 0.25rem 0.75rem; border: 1px solid #c8ccd4; border-radius: 4px; background: #fff; cursor: pointer;
+  }
+</style>
+<script>
+  document.addEventListener('click', function (event) {
+    var svg = event.target.closest && event.target.closest('code.language-mermaid svg');
+    if (!svg) return;
+    var box = svg.viewBox && svg.viewBox.baseVal;
+    var overlay = document.createElement('div');
+    overlay.className = 'diagram-zoom';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', 'Diagram at full size');
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Close (Esc)';
+    var copy = svg.cloneNode(true);
+    copy.removeAttribute('style');
+    if (box && box.width) {
+      copy.setAttribute('width', box.width);
+      copy.setAttribute('height', box.height);
+    }
+    overlay.appendChild(close);
+    overlay.appendChild(copy);
+    function dismiss() {
+      overlay.remove();
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    }
+    function onKey(e) { if (e.key === 'Escape') dismiss(); }
+    overlay.addEventListener('click', dismiss);
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    document.body.appendChild(overlay);
+    close.focus();
+  });
+</script>

@@ -1,0 +1,59 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Reverse proxies per environment (keys = environment ids from environments.yml).
+# Each environment has a list of proxies, e.g. one for the internet and one for the intranet.
+#   id      - unique within the environment; use the same id for the "same" proxy in every
+#             environment (it identifies the proxy on component pages)
+#   name    - display name
+#   clients - who connects to it, e.g. Internet, Intranet; proxies with the same clients
+#             share one source node in the traffic-flow diagram
+#   type    - e.g. nginx, Traefik, HAProxy
+#   host    - proxy hostname
+#   listen  - listeners
+#   routes  - public host + path -> backend component:port (port must be one of the
+#             component's ports in components.yml)
+#     tls   - where TLS is terminated / how the backend hop is secured
+
+test:
+  - id: internet
+    name: Internet proxy
+    clients: Internet
+    type: nginx
+    host: proxy.test.example.org
+    listen:
+      - { protocol: https, port: 443 }
+    routes:
+      - { public_host: example.test.example.org, path: /api/, component: component-a, port: 8080, tls: Terminated at proxy, notes: "" }
+
+  - id: intranet
+    name: Intranet proxy
+    clients: Intranet
+    type: nginx
+    host: proxy.test.example.internal
+    listen:
+      - { protocol: https, port: 443 }
+    routes:
+      - { public_host: example.test.example.internal, path: /reports/, component: component-c, port: 8090, tls: Terminated at proxy, notes: Office network and VPN only }
+      - { public_host: example.test.example.internal, path: /metrics/, component: component-a, port: 8081, tls: Terminated at proxy, notes: Scraped by monitoring }
+
+prod:
+  - id: internet
+    name: Internet proxy
+    clients: Internet
+    type: nginx
+    host: proxy.example.org
+    listen:
+      - { protocol: https, port: 443 }
+    routes:
+      - { public_host: example.example.org, path: /api/, component: component-a, port: 8080, tls: Terminated at proxy; re-encrypted to backend, notes: Rate limited }
+
+  - id: intranet
+    name: Intranet proxy
+    clients: Intranet
+    type: nginx
+    host: proxy.example.internal
+    listen:
+      - { protocol: https, port: 443 }
+    routes:
+      - { public_host: reports.example.internal, path: /, component: component-c, port: 8090, tls: Terminated at proxy, notes: SSO required }
+      - { public_host: example.example.internal, path: /metrics/, component: component-a, port: 8081, tls: Terminated at proxy, notes: Scraped by monitoring }

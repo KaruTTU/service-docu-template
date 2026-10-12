@@ -1,0 +1,14 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Network edges (environment-independent). `from` is a component id; `to` is a
+# component, database (databases.yml) or external dependency (external.yml) id.
+# Proxy -> component traffic is described in proxy.yml, not here.
+
+- { from: component-a, to: component-b, protocol: grpc, port: 9000, description: Submits background jobs }
+- { from: component-a, to: db-a, protocol: tcp, port: 5432, description: Reads and writes primary data }
+- { from: component-a, to: smtp-relay, protocol: smtp, port: 587, description: Sends notification e-mails }
+- { from: component-b, to: db-b, protocol: tcp, port: 6379, description: Job queue and results cache }
+- { from: component-b, to: payment-api, protocol: https, port: 443, description: Charges customers }
+- { from: component-c, to: component-a, protocol: http, port: 8080, description: Fetches report data via API }
+- { from: component-c, to: db-c, protocol: tcp, port: 5432, description: Stores report snapshots }
+- { from: component-c, to: db-a, protocol: tcp, port: 5432, description: "Read-only reporting queries (\"replica\" user)" }

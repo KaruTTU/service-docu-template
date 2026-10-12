@@ -1,0 +1,85 @@
+# Site settings. PLACEHOLDER values are marked; replace them before publishing.
+title: Service Docs                      # PLACEHOLDER: e.g. "<ORG NAME> Service Docs"
+description: Architecture, environments and traffic flow of our services.
+org_name: "<ORG NAME>"                   # PLACEHOLDER: shown on the home page
+
+# GitHub Pages project site: https://<ORG>.github.io/service-docu/ (PLACEHOLDER: <ORG> = GitHub org)
+url: "https://<ORG>.github.io"              # PLACEHOLDER
+baseurl: "/service-docu"                 # PLACEHOLDER: repository name
+
+theme: just-the-docs
+
+# Search
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  rel_url: true
+
+heading_anchors: true
+back_to_top: true
+back_to_top_text: "Back to top"
+
+aux_links:
+  "Source on GitHub":
+    - "https://github.com/<ORG>/service-docu"   # PLACEHOLDER
+aux_links_new_tab: true
+
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/<ORG>/service-docu"   # PLACEHOLDER
+gh_edit_branch: "main"
+gh_edit_view_mode: "tree"
+
+footer_content: "Generated from the data files in <code>_data/</code>. Edit the data, not the tables."
+
+# Callout boxes: put {: .note }, {: .important } or {: .warning } on the line after a paragraph.
+callouts:
+  note:
+    title: Note
+    color: purple
+  important:
+    title: Tip
+    color: blue
+  warning:
+    title: Warning
+    color: red
+
+# Mermaid diagrams (```mermaid code blocks), loaded from jsDelivr by the theme.
+mermaid:
+  version: "12.1.0"
+
+# Fail the build on Liquid syntax errors and unknown filters.
+liquid:
+  error_mode: strict
+  strict_filters: true
+
+markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - vendor/
+  - .github/
+  - .omc/
+  - tmp/                                 # scratch folder, never published
+
+# The theme's SCSS triggers Dart Sass deprecation warnings; hide them so real build warnings stand out.
+sass:
+  quiet_deps: true
+  silence_deprecations: [import, global-builtin, color-functions, slash-div]
+
+# Apply the theme layout to every page that doesn't set one (only index.md uses `home`).
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

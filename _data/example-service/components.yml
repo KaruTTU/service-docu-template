@@ -1,0 +1,41 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Components of the service (environment-independent facts).
+#   id          - unique within the service (also unique vs. databases.yml and external.yml ids);
+#                 must equal the `component:` front matter of docs/<service>/components/<id>.md
+#   name        - display name
+#   description - one line
+#   team        - owning team
+#   code_repo   - optional; URL of the source code repository
+#   deploy_repo - optional; URL of the deployment repository (Ansible, Helm, ...)
+#   ports       - ports the component listens on
+#
+# Database ownership lives in databases.yml (`owner`), network edges in connections.yml.
+
+- id: component-a
+  name: Component A
+  description: Public API. Handles client requests and owns the primary data.
+  team: "<Team A>"
+  code_repo: "https://git.example.org/example/component-a"
+  deploy_repo: "https://git.example.org/example/component-a-deploy"
+  ports:
+    - { port: 8080, protocol: http, purpose: REST API }
+    - { port: 8081, protocol: http, purpose: Health checks and metrics }
+
+- id: component-b
+  name: Component B
+  description: Background worker. Processes jobs submitted by Component A.
+  team: "<Team B>"
+  code_repo:      # TODO: URL of the code repository
+  deploy_repo:    # TODO: URL of the deployment repository
+  ports:
+    - { port: 9000, protocol: grpc, purpose: Job submission API }
+
+- id: component-c
+  name: Component C
+  description: Reporting UI. Reads data from Component A and the primary database.
+  team: "<Team A>"
+  code_repo:      # TODO: URL of the code repository
+  deploy_repo:    # TODO: URL of the deployment repository
+  ports:
+    - { port: 8090, protocol: http, purpose: Web UI }

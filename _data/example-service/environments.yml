@@ -1,0 +1,60 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Environment-specific hosts. List order = order used in tables and diagrams.
+#   id         - must equal the `env:` front matter of docs/<service>/<id>.md and a key in proxy.yml
+#   name       - display name
+#   sites      - optional; data centres / locations: site-id -> { name, notes }
+#   clusters   - optional; Kubernetes (or OpenShift, ...) clusters:
+#                cluster-id -> { type, api, sites: [site ids], notes }
+#   components - every component id from components.yml -> where it runs, either:
+#                  { hosts: [...] }                                  virtual machines / servers
+#                  { cluster: <clusters id>, namespace, replicas }   deployed to a cluster
+#   db_servers - optional; database servers/clusters that host several databases:
+#                server-id -> { host, port, notes, nodes }
+#                  host  - the address applications connect to (cluster VIP / DNS name)
+#                  nodes - optional; the cluster members: [{ host, site, role }]; one node with
+#                          role primary/leader is drawn replicating to the others; several
+#                          primaries (active in all sites at once) are drawn syncing pairwise
+#   databases  - every database id from databases.yml -> where it lives in this environment and its schema name:
+#                  { server: <db_servers id>, schema }   database on a shared server
+#                  { host, port, schema }                database on its own host
+
+- id: test
+  name: Test
+  clusters:
+    k8s-test: { type: Kubernetes, api: "https://k8s-test.example.internal:6443", notes: Shared test cluster }
+  components:
+    component-a: { cluster: k8s-test, namespace: example-test }
+    component-b: { hosts: [b-01.test.example.internal] }
+    component-c: { cluster: k8s-test, namespace: example-test }
+  db_servers:
+    pg-main: { host: pg-01.test.example.internal, port: 5432, notes: Single test instance }
+  databases:
+    db-a: { server: pg-main, schema: example_a_test }
+    db-c: { server: pg-main, schema: example_c_test }
+    db-b: { host: redis-01.test.example.internal, port: 6379, schema: "db 0" }
+
+- id: prod
+  name: Prod
+  sites:
+    dc1: { name: DC1 North, notes: Primary site }
+    dc2: { name: DC2 South, notes: Disaster-recovery site }
+  clusters:
+    k8s-prod: { type: Kubernetes, api: "https://k8s-prod.example.internal:6443", sites: [dc1, dc2], notes: "Stretched cluster, workers in both sites" }
+  components:
+    component-a: { cluster: k8s-prod, namespace: example, replicas: 3 }
+    component-b: { hosts: [b-01.prod.example.internal, b-02.prod.example.internal] }
+    component-c: { cluster: k8s-prod, namespace: example, replicas: 2 }
+  db_servers:
+    pg-main:
+      host: pg-cluster.prod.example.internal
+      port: 5432
+      notes: Patroni cluster, synchronous replica in DC2
+      nodes:
+        - { host: pg-01.dc1.example.internal, site: dc1, role: primary }
+        - { host: pg-02.dc1.example.internal, site: dc1, role: replica }
+        - { host: pg-03.dc2.example.internal, site: dc2, role: replica }
+  databases:
+    db-a: { server: pg-main, schema: example_a }
+    db-c: { server: pg-main, schema: example_c }
+    db-b: { host: redis-01.prod.example.internal, port: 6379, schema: "db 0" }

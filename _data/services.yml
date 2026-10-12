@@ -1,0 +1,28 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Registry of documented services. One entry per folder in docs/ and _data/.
+#   slug    - folder name under docs/ and _data/; pages reference it as `service:`
+#   title   - must equal the `title:` front matter of docs/<slug>/index.md
+#   summary - one line, shown on the home page
+#   purpose - longer description, shown on the service page (Markdown; write &lt; for a literal <)
+#   owners  - accountable people/teams
+#   links   - optional extra links (repo, issue tracker, dashboards)
+
+- slug: example-service
+  title: Example Service
+  summary: "<SERVICE NAME>: one-line summary of what the service does."
+  purpose: |
+    [SERVICE NAME] does X for Y. Replace this paragraph with the business purpose,
+    the main users and the most important workflows the service supports.
+  owners:
+    - name: "<Team Name>"
+      role: Service owner
+      contact: "team@example.org"
+    - name: "<Person Name>"
+      role: Technical lead
+      contact: "person@example.org"
+  links:
+    - name: Source repository
+      url: "https://git.example.org/example-service"
+    - name: Issue tracker
+      url: "https://issues.example.org/example-service"

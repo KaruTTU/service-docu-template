@@ -1,0 +1,16 @@
+// Keep hostnames, ports and schema names on one line; tables scroll sideways if needed.
+.main-content td code {
+  white-space: nowrap;
+}
+
+// Headings above the per-server database tables (tables/db-locations.md).
+.main-content h4 {
+  margin-top: 1.75rem;
+  text-transform: none;
+  font-size: 1rem !important;
+}
+
+.main-content h4 + p {
+  margin-top: 0.25rem;
+  color: $grey-dk-100;
+}

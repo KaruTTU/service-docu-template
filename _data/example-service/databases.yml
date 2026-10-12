@@ -1,0 +1,24 @@
+# PLACEHOLDER DATA: replace before publishing.
+#
+# Logical databases (environment-independent). Hosts and schema names per
+# environment live in environments.yml under `databases:`.
+#   id     - unique within the service (also unique vs. component and external ids)
+#   name   - display name used in diagrams and tables
+#   engine - engine and major version
+#   owner  - component id that owns the schema; other components accessing it
+#            show up as cross-access in the data diagram
+
+- id: db-a
+  name: Component A DB
+  engine: PostgreSQL 16
+  owner: component-a
+
+- id: db-b
+  name: Component B cache
+  engine: Redis 7
+  owner: component-b
+
+- id: db-c
+  name: Component C DB
+  engine: PostgreSQL 16
+  owner: component-c
